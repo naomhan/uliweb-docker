@@ -1,0 +1,67 @@
+{{extend "layout.html"}}
+
+{{block title}}创建容器{{end}}
+{{block content}}
+<div class="form-horizontal" role="form" style="width: 75%;">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">images</label>
+
+        <div class="col-sm-10">
+            <select id="select" class="form-control">
+                {{for image in images:}}
+
+                <option value="{{=image}}">{{=image}}</option>
+                {{pass}}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">name</label>
+
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" placeholder="name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="command" class="col-sm-2 control-label">command</label>
+
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="command" placeholder="command">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ip" class="col-sm-2 control-label">ip</label>
+
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="ip" placeholder="ip">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" id="submit">创建</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submit").bind("click", function () {
+
+            $.post("/containers/add", {
+                image: $("#select").val(),
+                name: $("#name").val(),
+                command:$("#command").val(),
+                ip: $("#ip").val()
+            }, function (result) {
+                console.log(result);
+                if (!result.success){
+                    alert(result.message);
+                }else{
+                    //todo 容器详情页
+                    window.location = "/containers";
+                }
+            });
+        });
+    });
+</script>
+{{end}}

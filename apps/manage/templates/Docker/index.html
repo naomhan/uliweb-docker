@@ -1,0 +1,42 @@
+{{extend "layout.html"}} {{block title}}docker内部管理系统{{end}} {{block content}}
+<div class="panel panel-default">
+    <div class="panel-heading heading-large">
+        <span class="panel-title section-title">系统信息</span>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tbody>
+                {{for (k,v) in version.iteritems():}}
+                <tr>
+                    <td>{{= k}}</td>
+                    <td>{{= v}}</td>
+                </tr>
+                {{ pass }}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">系统信息</div>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-default" style="float: left">
+            <div class="panel-heading">
+                <div class="panel-title">镜像</div>
+            </div>
+            <div class="panel-body">
+                有{{= images}}个镜像
+            </div>
+        </div>
+        <div class="panel panel-default" style="float: right">
+            <div class="panel-heading">
+                <div class="panel-title">容器</div>
+            </div>
+            <div class="panel-body">
+                有{{= containers}}个容器
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
